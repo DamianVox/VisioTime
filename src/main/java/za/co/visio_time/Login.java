@@ -19,9 +19,11 @@ public class Login {
     
     private String email;
     private String passwd;
+    private Boolean loggedIn;
 
     public String login() throws Exception{
     if(api.login(email, passwd)){
+        loggedIn = true;
         System.out.println("User found");
         return "home?faces-redirect=true";
     }else{
@@ -29,6 +31,18 @@ public class Login {
     return "index?faces-redirect=true";
     }
     }
+    //Ally-edit start
+    // Logout set user if login - true to login - false return login page
+    public String logout() throws Exception{
+    if (loggedIn == true){
+        System.out.println("User logged out");
+        return "index?faces-redirect=true";
+    }else{
+        System.err.println("There was a problem login out");
+        return "home?faces-redirect=true";
+    }
+    }
+    //Ally-edit stop
 
     public String getEmail() {
         return email;
