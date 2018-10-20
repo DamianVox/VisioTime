@@ -15,16 +15,22 @@
 <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body >
-   <ul id="categories" class="clr">
+        <h:form>
+        <ul id="categories" class="clr">
 <!--  <li class="pusher"></li>-->
 <!-- list item one use to call the user account page -->
-  <li>
+<!-- <b:button outcome="${PageController.account_page()}"> -->
+<a href="${PageController.account_page()}">
+  <li > 
       <div>
         <img src="https://farm7.staticflickr.com/6092/6227418584_d5883b0948.jpg" alt=""/>
         <h1>This is a title</h1>
         <p>Some sample text about the article this hexagon leads to</p>
     </div>
   </li>
+</a>
+<!--    </b:button>  -->
+    
   <li>
       <div>
         <img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt=""/>
@@ -61,5 +67,6 @@
     </div>
   </li>
 </ul>
+        </h:form>
     </h:body>
 </html>

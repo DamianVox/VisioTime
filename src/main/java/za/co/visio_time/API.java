@@ -100,4 +100,46 @@ public class API {
        }
 
 	}
+    
+    public String LoadUsers() throws Exception {
+    //String url = "http://localhost:9090/users";
+    String output = null;
+       try {
+
+		URL url = new URL("http://localhost:9090/visiotime/users");
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Accept", "application/json");
+
+		if (conn.getResponseCode() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+			(conn.getInputStream())));
+
+                while ((output = br.readLine()) != null) {
+			System.out.println(output);
+		}
+		//output = br.read();
+                
+		System.out.println("Output from Server .... \n");
+                System.out.println(output);
+		
+		conn.disconnect();
+                
+	  } catch (MalformedURLException e) {
+
+		e.printStackTrace();
+
+	  } catch (IOException e) {
+
+		e.printStackTrace();
+
+	  }
+       System.out.println(output);
+       return output;
+
+	}
 }

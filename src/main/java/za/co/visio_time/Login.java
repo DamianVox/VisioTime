@@ -5,42 +5,48 @@
  */
 package za.co.visio_time;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author DMHT
  */
 @ManagedBean(name = "Login")
-@RequestScoped
-public class Login {
+public class Login implements Serializable{
     API api = new API();
+    Session session;
+    PageController pagecontroller;
     
     private String email;
     private String passwd;
-    private Boolean loggedIn;
+    //private Boolean loggedIn;
 
     public String login() throws Exception{
     if(api.login(email, passwd)){
-        loggedIn = true;
-        System.out.println("User found");
+        //session.setLoggedin(true);
+        //System.out.println("User found");
         return "home?faces-redirect=true";
+        //return "home?faces-redirect=true";
     }else{
     System.out.println("! ! ! User not found ! ! !");
-    return "index?faces-redirect=true";
+    //session.setLoggedin(false);
+    return pagecontroller.home_page();
     }
     }
     //Ally-edit start
     // Logout set user if login - true to login - false return login page
     public String logout() throws Exception{
-    if (loggedIn == true){
-        System.out.println("User logged out");
+        //session.setLoggedin(false);
+    //if (!session.isLoggedin()){
+        //System.out.println("User logged out");
         return "index?faces-redirect=true";
-    }else{
-        System.err.println("There was a problem login out");
-        return "home?faces-redirect=true";
-    }
+    //}else{
+        //System.err.println("There was a problem login out");
+        //return "home?faces-redirect=true";
+    //}
     }
     //Ally-edit stop
 
@@ -58,6 +64,5 @@ public class Login {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
-    }
-    
+    }  
 }
